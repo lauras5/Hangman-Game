@@ -1,0 +1,35 @@
+body {
+    /* background-image: url(https://i.imgur.com/opkriub.jpg); */
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-align: center;
+}
+
+#buttons {
+    background-color: blue;
+    height: 54%;
+}
+#letterArray {
+  margin:15px auto;
+  padding: 10px;
+  max-width: 600px;
+}
+
+#letterArray li {
+  float:left;
+  margin: 0 10px 10px 0;
+  list-style:none;
+  line-height: 20px;
+  width: 40px;
+  padding:10px;
+  background: rgb(200, 96, 221);
+  cursor:pointer;
+  border: solid 5px white;
+    
+}
+
+#letterArray li:active {
+ background-color: rgb(125, 125, 134);
+}
+
