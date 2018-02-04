@@ -1,35 +1,32 @@
 body {
-    /* background-image: url(https://i.imgur.com/opkriub.jpg); */
+    background-image: url(http://zabbyallen.com/user/pages/01.blog/27.birthday-freebie-90s-kid-wallpaper/90s-kid-wallpaper-zabby-allen.jpg);
     background-attachment: fixed;
     background-repeat: no-repeat;
     background-size: cover;
     text-align: center;
 }
 
-#buttons {
+.jumbotron {
+    background-color: rgba(255, 254, 254, 0.89);
+    margin-top: 20px;
+    border: 10px solid rgb(248, 102, 175)
+}
+#display {
     background-color: blue;
-    height: 54%;
-}
-#letterArray {
-  margin:15px auto;
-  padding: 10px;
-  max-width: 600px;
 }
 
-#letterArray li {
-  float:left;
-  margin: 0 10px 10px 0;
-  list-style:none;
-  line-height: 20px;
-  width: 40px;
-  padding:10px;
-  background: rgb(200, 96, 221);
-  cursor:pointer;
-  border: solid 5px white;
-    
+h1 {
+    font-family: 'bevan';
 }
 
-#letterArray li:active {
- background-color: rgb(125, 125, 134);
+.letter-button {
+    background-color: #dca8da;
+    padding: 8px;
+    width: 50px;
+    border: 5px solid rgb(107, 106, 106);
+    margin: 5px;
 }
 
+#mainSection {
+    background-color: rgba(255, 255, 255, 0.801);
+}

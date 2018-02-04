@@ -1,39 +1,63 @@
 $(document).ready(function(){
-    var letterArray = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
-    var show = ["rugrats", "doug", "daria", "pokemon", "recess", "anamaniacs", "hey arnold"]
-    var randomShow = show[Math.floor(Math.random() * 
-    show.length)]
-    var score = 0
+    var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+    var lettersLength = letters.length
+    var shows = ["RUGRATS", "DOUG", "DARIA", "POKEMON", "RECESS", "ANAMANIACS", "CARMEN SAN DIEGO", "REN AND STIMPY", "THE SIMPSONS", "POWER RANGERS", "BEAVIS AND BUTTHEAD", "ROCKOS MODERN LIFE", "NINJA TURTLES"]
+    var showsLength = shows.length
+    var randomShow = shows[Math.floor(Math.random() * showsLength)]
+    var answer = [];
+        for (var i = 0; i < randomShow.length; i++) {
+            answer[i] = "_";
+        }
+    var wins = $("#wins")
+    var losses = $("#losses")
     var lives = 6
-    var space;
+    var getHint = $("#hintBtn")
 
-    console.log(randomShow)
-    console.log(score)
-    console.log(lives)
-
-    var buttons = function (ID) {
-        var ul = document.createElement('ul');
-        ul.id = 'letterArray';
-        for (var i = 0; i < letterArray.length; i++) {
-                li = document.createElement('li'); 
-                li.id = 'letter'+ i;  
-                //increases by 1 letter
-                li.innerHTML = letterArray[i];
-                ul.appendChild(li);
-            }
-        ID.appendChild(ul);
+    //generates random word on click
+    $("#newGame").on("click", function(){
+        randomShow = (shows[Math.floor(Math.random() * showsLength)])
+        underScores = []
+        for (var i = 0; i < randomShow.length; i++) {
+            underScores = underScores + "_ ";
+        }
+        $("#show").html(underScores)
+        // $("#show").html = (underScores.join(" "))
+    })
+    
+    // create buttons for letters
+    for (var i = 0; i < lettersLength; i++) {
+        var letterBtns = $("<button>")
+        letterBtns.attr("class", "letter-button letter letter-button-color")
+        letterBtns.attr("data-letter", letters[i])
+        letterBtns.text(letters[i])
+        $("#buttons").append(letterBtns)
       }
     
-     var myButtons = document.getElementById("buttons");
-     buttons(myButtons);
+    $(".letter-button").on("click", function() {
+        var letterBox = $("<span>")
+        letterBox.attr("class", "letter")
+        letterBox.text($(this).attr("data-letter"))
+        $("#display").append(letterBox)
 
-     $("#buttons").on("click", function() {
-         alert("you chose " + li.innerHTML)
-     })
+        //gets value for click on virtual keyboard
+        for (var i = 0; i < letters.length; i++) {
+            $('.letter').on("click", function(){
+                var input = $('.letter').val();
+        });
 
-    $("#newGame").on("click", function(){
-        console.log("the answer was " + randomShow) //alert isnt showing updated answers...loop?
-        var newShow = $("#show").html(show[Math.floor(Math.random() * show.length)])
-    })
+        function getAllIndexes (word,val) {
+            positions = [];
+            for (i = 0; i < randomShow.length; i++) {
+                if(randomShow[i]===val) {
+                    positions.push(i)
+                }
+            }
+            console.log("all index positions are" + positions[i])
+        }
+    }
+
 
 })
+
+})
+

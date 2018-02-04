@@ -3,6 +3,7 @@
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="assets/css/style.css">
+    <link href='https://fonts.googleapis.com/css?family=Bevan' rel='stylesheet'>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -13,25 +14,43 @@
     <div class="container-fluid">
       <div class="row">
         <!-- main content -->
-        <div class="col-sm-12" id="mainSection">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8">
+            <div class="jumbotron">
                 <h1>Hangman : 90's Cartoons!</h1>
                 <h2>Press any key to get started!</h2>
-
                 <!-- button for new word -->
-                <button id="newGame">New Game</button>
+                <button id="newGame">NEW GAME</button>
+                <br>
+                <span class="wins">WINS : </span>
+                <span class="losses">LOSSES : </span>
+                <br>
+                <button class="hintBtn">HINT!</button>
+                <p class="hint"></p>
+                <div id="hold"></div>
+                
+            </div>
+        </div>
+        <div class="col-sm-2"></div>
+      </div>
+
+      <div class="row">
+          <div class="col-sm-2"></div>
+          <div class="col-sm-8" id="mainSection">
                 <div id="lives"></div>
                 <div id="wrongGuess"></div>
+                <span id="display"></span>
                 <!-- TV image -->
-               
-                <!-- <img id="tv" src="assets/images/tv.png" alt="tv">  -->
 
                 <!-- where game _ _ _ will show up in TV -->
                 <p id="show"></p>
                 <div id="buttons"></div>
-        </div>
+          </div>
+          <div class="col-sm-2"></div>
+      </div>
+                
     </div>
-
-
+    </div>
     
 
     <script
