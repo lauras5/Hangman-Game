@@ -13,9 +13,9 @@ $(document).ready(function(){
     var losses = 0
     $("#losses").text("LOSSES : " + losses)
     var lives = 6
-    $("#lives").text("You have " + lives + " guesses left!");
     var hints = ["Gang of Babies", "Quail man's identity", "90's femenist", "Gotta Catch 'em all!", "playtime during school, not lunch", "They live in the WB tower", "Where in the world is...", "'It's log, log...", "Longest running cartoon.", "Morphin' time!", "'I need teepee for my bunghole'", "Friendly walabe", "Pizza lovin' turtles" ]
     var hintLength = hints.length
+    var positions = []
     var getHint = $("#hintBtn")
     $(".hintBtn").on("click", function(){
         if(shows[0] === randomShow) {
@@ -69,10 +69,13 @@ var myGuess = []
             underScores = underScores + "_ ";
         }
         $("#show").html(underScores)
+        $("#hint").html("Press the button to get a hint!")
+        $("#lives").text("You have " + lives + " guesses left!");
         console.log(randomShow)
     })
 
     // create buttons for letters
+    
     for (var i = 0; i < lettersLength; i++) {
         var letterBtns = $("<button>")
         letterBtns.attr("class", "letter-button letter")
@@ -85,29 +88,41 @@ var myGuess = []
         var letterBox = $("<span>")
         letterBox.attr("class", "letter")
         letterBox.text($(this).attr("data-letter"))
-        // $("#show").append(letterBox)
+        $("#show").append(letterBox)
 
         //gets value for click on virtual keyboard
         for (var i = 0; i < letters.length; i++) {
             $(".letter").on("click", function(){
                 var input = $(".letter").val();
+                // console.log(letterBox)
+
                 //logs the connection
                 var myGuess = input
                 if(randomShow.indexOf(myGuess)> -1) {
                     for(var j = 0; j < randomShow.length; j++) {
-                        if(randomShow[j] === myGuess) {
-                            underScores[j] = myGuess
+                        if(randomShow[j] === myGuess[i]) {
+                            myGuess[i] = g
+                            console.log(myGuess)
                         }
-                        console.log(input)
+                    }
+
+                    function getAllIndexes (word,val) {
+                        pos = str.indexOf (randomShow[i]);
+                        for (i = 0; i < randomShow.length; i++) {
+                            if(randomShow[i]===attr("data-letter")) {
+                                positions.push(i)
+                            }
+                            if (randomShow[i]===input) {
+                                ///push to space in #show
+                            }
+                        }
+                        console.log("all index positions are" + positions[i])
                     }
                    
                 }
-                else {
-                    wrongLetter.push(myGuess)
-                    conosle.log(wrongLetter)
-                    Lives--;
-                }
+
             });
+  
         }
     })
 })
