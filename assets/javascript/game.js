@@ -5,13 +5,10 @@ $(document).ready(function(){
     var showsLength = shows.length
     var randomShow = shows[Math.floor(Math.random() * showsLength)]
     var answer = [];
-        for (var i = 0; i < randomShow.length; i++) {
-            answer[i] = "_";
-        }
     var wins = 0
-    $("#wins").text("WINS : " + wins)
+    $(".wins").text("WINS : " + wins)
     var losses = 0
-    $("#losses").text("LOSSES : " + losses)
+    $(".losses").text("LOSSES : " + losses)
     var lives = 6
     var hints = ["Gang of Babies", "Quail man's identity", "90's femenist", "Gotta Catch 'em all!", "playtime during school, not lunch", "They live in the WB tower", "Where in the world is...", "'It's log, log...", "Longest running cartoon.", "Morphin' time!", "'I need teepee for my bunghole'", "Friendly walabe", "Pizza lovin' turtles" ]
     var hintLength = hints.length
@@ -64,13 +61,13 @@ var myGuess = []
     //generates random word on click
     $("#newGame").on("click", function(){
         randomShow = (shows[Math.floor(Math.random() * showsLength)])
-        underScores = []
+        answer = []
         for (var i = 0; i < randomShow.length; i++) {
-            underScores = underScores + "_ ";
+            answer[i] = answer + "_ ";
         }
-        $("#show").html(underScores)
+        // $(".display").html(answer.join(" "))
         $("#hint").html("Press the button to get a hint!")
-        $("#lives").text("You have " + lives + " guesses left!");
+        $(".lives").text("You have " + lives + " guesses left!");
         console.log(randomShow)
     })
 
@@ -88,21 +85,21 @@ var myGuess = []
         var letterBox = $("<span>")
         letterBox.attr("class", "letter")
         letterBox.text($(this).attr("data-letter"))
-        $("#show").append(letterBox)
+        $("#display").append(letterBox)
 
         //gets value for click on virtual keyboard
         for (var i = 0; i < letters.length; i++) {
             $(".letter").on("click", function(){
                 var input = $(".letter").val();
-                // console.log(letterBox)
+                console.log(input)
 
                 //logs the connection
                 var myGuess = input
                 if(randomShow.indexOf(myGuess)> -1) {
                     for(var j = 0; j < randomShow.length; j++) {
-                        if(randomShow[j] === myGuess[i]) {
-                            myGuess[i] = g
-                            console.log(myGuess)
+                        if(randomShow[j] === myGuess) {
+                            
+                            console.log("great job!")
                         }
                     }
 
@@ -116,7 +113,6 @@ var myGuess = []
                                 ///push to space in #show
                             }
                         }
-                        console.log("all index positions are" + positions[i])
                     }
                    
                 }

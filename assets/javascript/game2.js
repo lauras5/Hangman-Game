@@ -1,110 +1,67 @@
-//research for assignment, might need in code
+$(document).ready(function(){
+    var shows = ["POKEMON", "SABRINA", "DOUG", "HEY ARNOLD", "NINJA TURTLES", "YUGIOH"]
+    var show = shows[Math.floor(Math.random() * shows.length)]
+    var letters = show.split("")
+    var guesses = 10
+    $(".guessesLeft").text("You have " + guesses + " guesses left!");
+    var userLives = []
+    $(".lives")
+    var remainingLetters = letters.length
+    var userGuess = []
+    var answerArray = []
+    for (var i = 0; i < letters.length; i++)
+      answerArray[i] = "_ "
 
-charAt() //returns the character at the specified index, written as...
-length //returns the length of the string, written as...
-charCodeAt()//returns the unicode of the character at specified index, written as...
-fromCharCode()//converts Unicode values to characters, written as..
-indexOf() //returns the position of the first found occurence of a specified value in a string, written as..
-split() //splits a string into an array of substrings
-
-
-var buttons = function (ID) {
-    //created element for ul to hold li
-    var ul = document.createElement('ul');
-    ul.id = 'letterArray';
-    for (var i = 0; i < letters.length; i++) {
-        li = document.createElement('li'); 
-        li.id = 'letter'+ i;  
-            //increases by 1 letter
-            li.innerHTML = letters[i];
-            ul.append(li);
-        }
-    ID.append(ul);
-}
-
-    var myLetters = document.getElementById("buttons");
-    buttons(myLetters);
-
-
-     //cant pick specific letter
-     $("#buttons").on("click", function() {
-         console.log("you chose " + letters)
-     })
-
-         // //array of letters
-    // var a = 65;
-    // var charArray = {};
-    // for (var i = 0; i<26; i++)
-    // charArray[String.fromCharCode(a + i)] = String.fromCharCode(a + i);
-
-
-        
-    //check letters
-    //WHEN KEY IS PRESSED, 
-    //RUN IT THROUGH THE GENERATED WORD,
-    //IF VAR E = LETTER IN THAT STRING
-    //CHANGE LETTER IN STRING FROM _ TO PRESSED KEY
-    //KEY COLOR CHANGES TO LIGHT BLUE
-
-    //ELSE IF LETTER IS NOT IN STRING, 
-    //LIVES --
-    //KEY COLOR CHANGES TO NAVY
-
-
-    //alert key pressed
-    //create loop to connect to letters array
-
-<body>
-    <h1 id = "numGuess"></h1>
-    <h3 id="myNum"><h3>
-    <div id="crystals"></div>
-</body>
-
-<script>
-    {
-    //script
-
-    //get random #
-    var total = 0
-    var randNum = Math.floor(Math.random * 100)
-    $("#numGuess").text("click...blah")
-
-    for (var i=0; i<4; i++) {
-        //gives image new value
-        var myImage = $("<img>")
-        //gives div an image
-        myImage.attr("src", "crystal.jpg")
-        myImage.attr("class", "myCrystal")
-        myImage.attr("date-crystalValue", Math.floor(Math.random()* 20))
-        $("#crystals").append(myImage)
-    }
-
-    $(".myCrystal".on("click", function()
-        var crystalNum = parseInt//takes string and converts into number//($(this).attr("data-crystalValue"))
-        total += crystalNumb //will bring string
-        $("#myNum").text(total)
-        if(total === randNum) {
-            alert(you win)
-        }
-        else if ( total > )
+    $("#newGame").on("click", function(){
+        show = shows[Math.floor(Math.random() * shows.length)]
+        //displays word to guess as underscores
+        guesses = 10
+        var answerArray = []
+        for (var i = 0; i < letters.length; i++)
+          answerArray.push("_")
+        $(".display").html(answerArray.join(" "))
+        //resets lives on button click
+        console.log(letters)
+        console.log(answerArray)
+        console.log(letters[2])
+        console.log(guesses)
     })
 
+    //gets letter on keyboard letter press
+    $(document).on("keypress", function(){
+        userGuess = String.fromCharCode(event.keyCode).toUpperCase()
+        
+        // console.log(userGuess)
 
-    //conditions to check win or lose
-}
-    
-    //check letters
-    //WHEN KEY IS PRESSED, 
-    //RUN IT THROUGH THE GENERATED WORD,
-    //IF VAR E = LETTER IN THAT STRING
-    //CHANGE LETTER IN STRING FROM _ TO PRESSED KEY
-    //KEY COLOR CHANGES TO LIGHT BLUE
+        //while loop
+        if (guesses > 0) {
+            for (var j = 0; j < letters.length; j++) {
+                // console.log(show[j])
+                // console.log(show[2])
+                if (letters[j] === userGuess) { 
+                    answerArray.push(userGuess)
+                    console.log(answerArray)
+                    remainingLetters--
+                    console.log(letters[j])
+                }
 
-    //ELSE IF LETTER IS NOT IN STRING, 
-    //LIVES --
-    //KEY COLOR CHANGES TO NAVY
-
-
-    //alert key pressed
-    //create loop to connect to letters array
-    </script>
+                else if(letters[j] != userGuess) {
+                    guesses--;
+                    $(".guesses").append(userGuess + " ")
+                    console.log(letters[j])
+        
+                }
+//push wrong guesses
+                if (guesses == 0) {
+                    alert("YOU LOST!")
+                    $(document).on("keypress", function() {
+                        null
+                    })
+                }
+                   
+            }
+            
+        
+        }
+    })
+})
