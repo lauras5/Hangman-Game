@@ -1,116 +1,110 @@
-$(document).ready(function(){
-    var letters = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
-    var lettersLength = letters.length
-    var words  = ["RUGRATS", "DOUG", "DARIA", "POKEMON", "RECESS", "ANAMANIACS", "CARMEN/SAN/DIEGO", "REN AND STIMPY", "THE SIMPSONS", "POWER RANGERS", "BEAVIS AND BUTTHEAD", "ROCKOS MODERN LIFE", "NINJA TURTLES"]
-    var randomWord = words[Math.floor(Math.random() * words.length)]
-    var answer = [];
-    var wins = "0"
-    $(".wins").text("WINS : " + wins)
-    var losses = 0
-    $(".losses").text("LOSSES : " + losses)
-    var guessesLeft = []
-    var hints = ["Gang of Babies", "Quail man's identity", "90's femenist", "Gotta Catch 'em all!", "playtime during school, not lunch", "They live in the WB tower", "Where in the world is...", "'It's log, log...", "Longest running cartoon.", "Morphin' time!", "'I need teepee for my bunghole'", "Friendly walabe", "Pizza lovin' turtles" ]
+
+$(document).ready(function () {
+
+    var words = ["RUGRATS", "DOUG", "DARIA", "POKEMON", "RECESS", "ANAMANIACS", "MATILDA", "DUCKTALES"]
+    //returns random word
+    var chosenWord = words[Math.floor(Math.random() * words.length)]
+    var underScores = []
+    var wrongGuesses = [] //store wrong guesses
+    var guesses = 10 //guess max
+    var wins = 0;
+    var wrongGuesses = []
+    $(".wins").html("WINS : " + wins)
+    var hints = ["Babies who do stuff", "Quail man's identity", "90's femenist", "Gotta Catch 'em all!", "playtime during school, not lunch", "They live in the WB tower", "Girl Genius", "Quack"]
     var hintLength = hints.length
-    var getHint = $("#hintBtn")
-    $(".hintBtn").on("click", function(){
-        if(words[0] === randomWord) {
+    var chosenNum = []
+
+
+    //hint button onclick function
+    $(".hintBtn").on("click", function () {
+        if (words[0] === chosenWord) {
             $("#hint").text(hints[0])
         }
-        else if (words[1]=== randomWord) {
+        else if (words[1] === chosenWord) {
             $("#hint").text(hints[1])
         }
-        else if (words[2]=== randomWord) {
+        else if (words[2] === chosenWord) {
             $("#hint").text(hints[2])
         }
-        else if (words[3]=== randomWord) {
+        else if (words[3] === chosenWord) {
             $("#hint").text(hints[3])
         }
-        else if (words[4]=== randomWord) {
+        else if (words[4] === chosenWord) {
             $("#hint").text(hints[4])
         }
-        else if (words[5]=== randomWord) {
+        else if (words[5] === chosenWord) {
             $("#hint").text(hints[5])
         }
-        else if (words[6]=== randomWord) {
+        else if (words[6] === chosenWord) {
             $("#hint").text(hints[6])
         }
-        else if (words[7]=== randomWord) {
+        else if (words[7] === chosenWord) {
             $("#hint").text(hints[7])
         }
-        else if (words[8]=== randomWord) {
-            $("#hint").text(hints[8])
-        }
-        else if (words[9]=== randomWord) {
-            $("#hint").text(hints[9])
-        }
-        else if (words[10]=== randomWord) {
-            $("#hint").text(hints[10])
-        }
-        else if (words[11]=== randomWord) {
-            $("#hint").text(hints[11])
-        }
-        else if (words[12]=== randomWord) {
-            $("#hint").text(hints[12])
-        }
     })
-    var wrongLetter = []
 
-
-    //generates random word on click
-    $("#newGame").on("click", function(event){
-        randomWord = (words[Math.floor(Math.random() * words.length)])
-        answer = []
-        for (var i = 0; i < randomWord.length; i++) {
-            answer[i] =  "_ ";
-        }
-        $(".display").html(answer.join(" "))
+    //new game function is acting as reset
+    function reset() {
+        wrongGuesses = []
+        underScores = []
+        guesses = 10
+        $(".wrongGuesses").empty()
+        $(".guessesLeft").html("You have " + guesses + " guesses left!")
+        $(".display").empty()
         $("#hint").html("Press the button to get a hint!")
-        guessesLeft = 10
-        $(".guessesLeft").text("You have " + guessesLeft + " guesses left!");
-        console.log(randomWord)
-    })
+    }
 
-    // create buttons for letters
-    
-    for (var i = 0; i < lettersLength; i++) {
-        var letterBtns = $("<button>")
-        letterBtns.attr("class", "letter-button letter")
-        letterBtns.attr("data-letter", letters[i])
-        letterBtns.text(letters[i])
-        $("#buttons").append(letterBtns)
-      }
-    
-    $(".letter-button").on("click", function() {
-        var letterBox = $("<span>")
-        letterBox.attr("class", "letter")
-        letterBox.text($(this).attr("data-letter"))
-        $(".display").append(letterBox)
-
-        //gets value for click on virtual keyboard
-        for (var i = 0; i < letters.length; i++) {
-            $(".letter").on("click", function(){
-                var myGuess = $(".letter").val();
-                console.log(letters[i])
-                console.log(myGuess)
-
-                //logs the connection
-                if(randomWord.indexOf(myGuess) > -1) {
-                    console.log("hello")
-                    wins++
-                }
-            });
-
-            function getAllIndexes (word, myGuess) {
-                var positions = randomWord.indexOf(myGuess)
-                for (i = 0; i < randomWord.length; i++) {
-                    if(randomWord[i]===myGuess)
-                    console.log("yay")
-                }
-
-            }
-            
+    $("#newGame").on("click", function () {
+        reset()
+        chosenWord = words[Math.floor(Math.random() * words.length)]
+        for (var i = 0; i < chosenWord.length; i++) {
+            underScores.push("_ ")
         }
+        $(".display").html(underScores)
+
+        console.log("your random word is " + chosenWord)
     })
+
+    if (guesses > 0) {
+        //gets value when key is released
+        $(document).on("keyup", function (e) {
+            //changes char value to uppercase
+            guess = String.fromCharCode(e.keyCode).toUpperCase()
+            //excludes symbols and other keys
+            if (e.which <= 90 && e.which >= 48) {
+                //if the index is equal to or greater than 0
+                if (chosenWord.indexOf(guess) > -1) {
+                    var splitWord = chosenWord.split('')
+                    
+                    //changes letters to underscores
+                    for (j = 0; j < splitWord.length; j++) {
+                        if (chosenWord[j] === guess) {
+                            chosenNum.push(guess)
+                            console.log(chosenNum)
+                            underScores[j] = chosenWord[j]
+                            console.log(underScores.length)
+                            // console.log(underScores)
+                            underScores.join(" ")
+                            $(".display").html("<h2>" + underScores + "</h2>")
+                            // if(chosenNum[j] === underScores[j]) {
+                            //     alert('yay!')
+                            // }
+                        }
+                    }
+                }
+                else {
+                    // if ( chosenWord[i] != guess) {
+                    guesses--
+                    $(".guessesLeft").html("You have " + guesses + " guesses left!")
+                    wrongGuesses.push(guess)
+                    $(".wrongGuesses").append(guess)
+                    if (guesses === 0) {
+                        alert("You Lost! The answer was '" + chosenWord + "' ! Play again!!")
+                        reset()
+                    }
+                    // }
+                }
+            }
+        })
+    }
 })
-
-

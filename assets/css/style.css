@@ -1,5 +1,5 @@
 body {
-    background-image: url("https://www.muralswallpaper.co.uk/app/uploads/geometric-90s-plain.jpg");
+    background-image: url("../images/background-image.jpg");
     background-attachment: fixed;
     background-size: cover;
     text-align: center;
@@ -7,8 +7,8 @@ body {
 
 .jumbotron {
     margin-top: 10%;
-    background-image: url("https://media.giphy.com/media/oZ9bVjdHxJsiI/giphy.gif");
-    background-size: cover;
+    background-color: white;
+   
     border: 30px solid rgb(68, 66, 66);
     
 }
