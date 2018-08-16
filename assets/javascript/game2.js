@@ -1,6 +1,6 @@
 $(document).ready(function(){
     var wordArr = [
-        'handsome', '', 'yay', 'hangman','hard'
+        'handsome', 'elbow', 'yay', 'hangman','hard'
     ]
     var chosenWord = ''
     var wordLetters = ''
