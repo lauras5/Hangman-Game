@@ -9,11 +9,11 @@ $(document).ready(function () {
     var guesses = 10 //guess max
     var wins = 0;
     var wrongGuesses = []
-    $(".wins").html("WINS : " + wins)
     var hints = ["Babies who do stuff", "Quail man's identity", "90's femenist", "Gotta Catch 'em all!", "playtime during school, not lunch", "They live in the WB tower", "Girl Genius", "Quack"]
     var hintLength = hints.length
-    var chosenNum = []
+    var chosenLet = []
 
+    $(".wins").html("WINS : " + wins)
 
     //hint button onclick function
     $(".hintBtn").on("click", function () {
@@ -48,52 +48,62 @@ $(document).ready(function () {
         wrongGuesses = []
         underScores = []
         guesses = 10
+
         $(".wrongGuesses").empty()
         $(".guessesLeft").html("You have " + guesses + " guesses left!")
         $(".display").empty()
         $("#hint").html("Press the button to get a hint!")
-    }
-
-    $("#newGame").on("click", function () {
-        reset()
+        
         chosenWord = words[Math.floor(Math.random() * words.length)]
         for (var i = 0; i < chosenWord.length; i++) {
             underScores.push("_ ")
         }
         $(".display").html(underScores)
-
+    
         console.log("your random word is " + chosenWord)
+    }
+
+    function checkWin() {
+        // if the chosenLet contains the same letters as the chosenWord array
+    }
+
+    // click event for new game button
+    $("#newGame").on("click", function () {
+        reset()
     })
 
-    if (guesses > 0) {
+    if (guesses > -1) {
+
         //gets value when key is released
         $(document).on("keyup", function (e) {
+            console.log(underScores)
+            console.log(chosenLet)
+            console.log(chosenWord)
+
+            if (underScores.length === 0) {
+                alert('You Win!')
+                reset()
+            }
             //changes char value to uppercase
             guess = String.fromCharCode(e.keyCode).toUpperCase()
+
             //excludes symbols and other keys
             if (e.which <= 90 && e.which >= 48) {
-                //if the index is equal to or greater than 0
+
+                //if the index is greater than -1
                 if (chosenWord.indexOf(guess) > -1) {
                     var splitWord = chosenWord.split('')
-                    
+
                     //changes letters to underscores
                     for (j = 0; j < splitWord.length; j++) {
                         if (chosenWord[j] === guess) {
-                            chosenNum.push(guess)
-                            console.log(chosenNum)
+                            chosenLet.push(guess)
                             underScores[j] = chosenWord[j]
-                            console.log(underScores.length)
-                            // console.log(underScores)
-                            underScores.join(" ")
-                            $(".display").html("<h2>" + underScores + "</h2>")
-                            // if(chosenNum[j] === underScores[j]) {
-                            //     alert('yay!')
-                            // }
+                            $(".display").html("<h2>" + underScores.join('') + "</h2>")
                         }
                     }
                 }
                 else {
-                    // if ( chosenWord[i] != guess) {
                     guesses--
                     $(".guessesLeft").html("You have " + guesses + " guesses left!")
                     wrongGuesses.push(guess)
@@ -102,7 +112,6 @@ $(document).ready(function () {
                         alert("You Lost! The answer was '" + chosenWord + "' ! Play again!!")
                         reset()
                     }
-                    // }
                 }
             }
         })
