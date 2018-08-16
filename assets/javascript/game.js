@@ -13,10 +13,9 @@ $(document).ready(function () {
     var hintLength = hints.length
     var chosenLet = []
 
-    $(".wins").html("WINS : " + wins)
 
     //hint button onclick function
-    $(".hintBtn").on("click", function () {
+    $("#hintBtn").on("click", function () {
         if (words[0] === chosenWord) {
             $("#hint").text(hints[0])
         }
@@ -53,18 +52,23 @@ $(document).ready(function () {
         $(".guessesLeft").html("You have " + guesses + " guesses left!")
         $(".display").empty()
         $("#hint").html("Press the button to get a hint!")
-        
+
         chosenWord = words[Math.floor(Math.random() * words.length)]
         for (var i = 0; i < chosenWord.length; i++) {
             underScores.push("_ ")
         }
         $(".display").html(underScores)
-    
+
         console.log("your random word is " + chosenWord)
     }
 
-    function checkWin() {
-        // if the chosenLet contains the same letters as the chosenWord array
+    function checkWin(completedWord) {
+        if (completedWord === chosenWord) {
+            wins++
+            alert('You Win! Play again!')
+            $(".wins").html("WINS : " + wins)
+            reset()
+        }
     }
 
     // click event for new game button
@@ -76,14 +80,7 @@ $(document).ready(function () {
 
         //gets value when key is released
         $(document).on("keyup", function (e) {
-            console.log(underScores)
-            console.log(chosenLet)
-            console.log(chosenWord)
 
-            if (underScores.length === 0) {
-                alert('You Win!')
-                reset()
-            }
             //changes char value to uppercase
             guess = String.fromCharCode(e.keyCode).toUpperCase()
 
@@ -100,6 +97,10 @@ $(document).ready(function () {
                             chosenLet.push(guess)
                             underScores[j] = chosenWord[j]
                             $(".display").html("<h2>" + underScores.join('') + "</h2>")
+
+                            const completedWord = underScores.join('')
+
+                            checkWin(completedWord)
                         }
                     }
                 }
@@ -108,6 +109,7 @@ $(document).ready(function () {
                     $(".guessesLeft").html("You have " + guesses + " guesses left!")
                     wrongGuesses.push(guess)
                     $(".wrongGuesses").append(guess)
+                    
                     if (guesses === 0) {
                         alert("You Lost! The answer was '" + chosenWord + "' ! Play again!!")
                         reset()
